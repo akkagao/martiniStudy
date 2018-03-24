@@ -1,0 +1,16 @@
+package: github.com/akkagao/martiniStudy
+import:
+- package: github.com/go-martini/martini
+  version: ^1.0.0
+- package: github.com/jinzhu/gorm
+  version: ^1.9.1
+  subpackages:
+  - dialects/postgres
+- package: github.com/mitchellh/go-homedir
+- package: github.com/pquerna/ffjson
+  subpackages:
+  - ffjson
+- package: github.com/spf13/cobra
+  version: ^0.0.1
+- package: github.com/spf13/viper
+  version: ^1.0.2
