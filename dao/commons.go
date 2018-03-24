@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"os"
 )
 
-var(
+var (
 	DB *gorm.DB
 )
 
@@ -18,13 +19,23 @@ func InitGorm() {
 	}
 	defer db.Close()
 
+	// 开启日志
 	db.LogMode(true)
+	//设置链接池
 	db.DB().SetMaxIdleConns(10)
 	db.DB().SetMaxOpenConns(100)
+	// 测试数据库是否链接成功
+	err = db.DB().Ping()
+	if err != nil {
+		panic("connect database fail...")
+		os.Exit(1)
+	}
 
-	showTests()
-	db.Exec("update test set name = 'gaojianwen' where id = 1")
-	showTests()
+	println("connect database success...")
+
+	//showTests()
+	//db.Exec("update test set name = 'gaojianwen' where id = 1")
+	//showTests()
 
 }
 

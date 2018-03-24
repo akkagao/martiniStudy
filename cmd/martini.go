@@ -21,6 +21,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/akkagao/martiniStudy/router"
+	"github.com/akkagao/martiniStudy/dao"
 )
 
 // martiniCmd represents the martini command
@@ -44,6 +45,7 @@ func initMartini() {
 	m.Handlers(martini.Recovery())
 	router.Router(m)
 	m.Run()
+	dao.InitGorm()
 }
 
 func init() {
