@@ -17,7 +17,7 @@ func InitGorm() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	defer db.Close()
+	//defer db.Close()
 
 	// 开启日志
 	db.LogMode(true)
@@ -33,9 +33,9 @@ func InitGorm() {
 
 	println("connect database success...")
 
-	//showTests()
-	//db.Exec("update test set name = 'gaojianwen' where id = 1")
-	//showTests()
+	showTests()
+	db.Exec("update t_user set name = 'gaojianwen_tset' where id = 1")
+	showTests()
 
 }
 
@@ -44,6 +44,6 @@ func showTests() {
 		ID   int
 		Name string
 	}
-	DB.Raw("select id,name from test where id = ?", 1).Scan(&test)
+	DB.Raw("select id,name from t_user where id = ?", 1).Scan(&test)
 	fmt.Println(test)
 }

@@ -15,9 +15,18 @@ func Router(m *martini.ClassicMartini) {
 
 	m.Get("/test/showurl", service.TestShowUrl)
 
+	// 用户模块
 	m.Group("/user", func(r martini.Router) {
-		r.Get("/getUser", service.GetUser)
-		r.Post("/addUser/:name/:tel/:mail", service.AddUser)
+		// 测试返回数据
+		r.Group("/test", func(router martini.Router) {
+			r.Get("/getUser/:name", service.GetUserTest)
+			r.Post("/addUser/:name/:tel/:mail", service.AddUserTest)
+		})
+
+		// 从数据库读取数据
+		r.Group("/db", func(router martini.Router) {
+			r.Get("/getUser/:id", service.GetUser)
+		})
 	})
 
 	m.NotFound(func() {

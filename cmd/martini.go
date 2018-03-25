@@ -44,8 +44,10 @@ func initMartini() {
 	//http.Handle("/", m)
 	m.Handlers(martini.Recovery())
 	router.Router(m)
-	m.Run()
+	println("test")
 	dao.InitGorm()
+	m.Run()
+	defer dao.DB.Close()
 }
 
 func init() {
